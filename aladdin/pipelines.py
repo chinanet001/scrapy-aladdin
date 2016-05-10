@@ -25,10 +25,9 @@ class JsonWithEncodingAladdinPipeline(object):
         #self.file.write(line)
         data = dict(item)
         cell = 0
-        if data.get('name') is not None:
+        if data.get('name') is not None and data.get('phone') is not None and len(data.get('phone')) > 0:
             self.table.write(self.row, cell, data.get('name'))
             cell += 1
-        if data.get('phone') is not None:
             for v in data.get('phone'):
                 self.table.write(self.row, cell, v)
                 cell += 1

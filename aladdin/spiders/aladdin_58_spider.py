@@ -20,7 +20,7 @@ from aladdin.misc.log import *
 
 
 class AladdinSpider(CrawlSpider):
-    name = "aladdin"
+    name = "aladdin58"
     allowed_domains = ["zbj.com"]
     start_urls = [
         "http://www.zbj.com/ppsj/p.html",
@@ -52,8 +52,8 @@ class AladdinSpider(CrawlSpider):
     ]
 
     def parse_item(self, response):
-        rand = random.randint(1, 2)
-        time.sleep(rand)
+        rand = random.randint(2, 4)
+        #time.sleep(rand)
         items = []
         sel = Selector(response)
         base_url = get_base_url(response)
