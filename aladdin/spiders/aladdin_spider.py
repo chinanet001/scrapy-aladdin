@@ -52,7 +52,7 @@ class AladdinSpider(CrawlSpider):
     ]
 
     def parse_item(self, response):
-        rand = random.randint(1, 2)
+        rand = random.randint(1, 4)
         time.sleep(rand)
         items = []
         sel = Selector(response)
