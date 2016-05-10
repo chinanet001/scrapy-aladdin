@@ -37,8 +37,8 @@ class AladdinSpider(CrawlSpider):
     ]
     rules = [
         Rule(sle(allow=("shop.zbj.com/\d+$")), follow=True, callback='parse_item'),
-        #Rule(sle(allow=("/ppsj/.*\d+\.html")), follow=True, callback='parse_item')
-        Rule(sle(allow=("/ppsj/pp\d+.html")), follow=True, callback='parse_item')
+        Rule(sle(allow=("/ppsj/pp\d+.html")), follow=True, callback='parse_item'),
+        #Rule(sle(allow=("shop.zbj.com/11463343/")), follow=True, callback='parse_item')
     ]
 
     def parse_item(self, response):
@@ -59,14 +59,14 @@ class AladdinSpider(CrawlSpider):
                     info_phones = root_path.xpath('./div[@class="shop-fix-im-time"]'
                                                   '/div[@class="fix-im-cate"]/following-sibling::*')
                     if info_phones is not None:
-                        phone_str = ''
+                        phone_set = set()
                         for info_phone in info_phones:
                             if info_phone.xpath('text()') is not None:
                                 phone_extract = info_phone.xpath('text()').extract()
                                 if phone_extract is not None and len(phone_extract) > 0:
                                     phone = phone_extract[0].strip()
-                                    phone_str = phone + ' '
-                            item['phone'] = phone_str
+                                    phone_set.add(phone)
+                        item['phone'] = phone_set
             if item.get('name') is not None and item.get('phone') is not None:
                 items.append(item)
         info(str(response))

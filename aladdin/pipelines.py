@@ -25,9 +25,13 @@ class JsonWithEncodingAladdinPipeline(object):
         #self.file.write(line)
         data = dict(item)
         cell = 0
-        for x in data.values():
-            self.table.write(self.row, cell, x)
+        if data.get('name') is not None:
+            self.table.write(self.row, cell, data.get('name'))
             cell += 1
+        if data.get('phone') is not None:
+            for v in data.get('phone'):
+                self.table.write(self.row, cell, v)
+                cell += 1
         self.row += 1
         self.excel.save('aladdin.xls')
         return item
