@@ -23,15 +23,47 @@ class AladdinSpider(CrawlSpider):
     name = "aladdin58"
     allowed_domains = ["58.com"]
     start_urls = [
-        "http://quanguo.58.com/chuanmei"
+        "http://quanguo.58.com/chuanmei",
+        "http://quanguo.58.com/hunjiehunqing/",
+        "http://quanguo.58.com/shangwu/",
+        "http://quanguo.58.com/zhaoshang/",
+        "http://quanguo.58.com/shenghuo/",
+        "http://quanguo.58.com/xiuxianyl/",
+        "http://quanguo.58.com/liren/",
+        "http://quanguo.58.com/jiaoyu/",
+        "http://quanguo.58.com/jianshen",
+        "http://quanguo.58.com/zuliaoam",
+        "http://quanguo.58.com/spa",
+        "http://quanguo.58.com/hunjiehunqing/",
+        "http://quanguo.58.com/rjgcspeixun",
+        "http://quanguo.58.com/pmshpeixun",
+        "http://quanguo.58.com/mba",
+        "http://quanguo.58.com/wlyxpeixun/",
+        "http://quanguo.58.com/techang/",
+        "http://quanguo.58.com/youjiao/",
+        "http://quanguo.58.com/taijiao/",
+        "http://quanguo.58.com/qinzijiaoyu/",
+        "http://quanguo.58.com/youeryuanjiaoyu/",
+        "http://quanguo.58.com/xueqianjiaoyu/",
+        "http://quanguo.58.com/muyingyp/",
+        "http://quanguo.58.com/huazhuangp/",
+        "http://quanguo.58.com/shop/",
+        "http://quanguo.58.com/xianhuasudi/",
+        "http://quanguo.58.com/zhuangxiujc/",
+        "http://quanguo.58.com/qichefw/",
+        "http://quanguo.58.com/lvyouxiuxian/",
+        "http://quanguo.58.com/canyin/",
+        "http://quanguo.58.com/nonglinmy/",
+        "http://quanguo.58.com/yiliaobaojian/"
+
     ]
     rules = [
         Rule(sle(allow=("/chuanmei/pn\d+")), follow=True, callback='parse_item'),
-        Rule(sle(allow=("http://\w+.58.com/chuanmei/.+\.shtml")), follow=True, callback='parse_item')
+        Rule(sle(allow=("http://\w+.58.com/.+\.shtml")), follow=True, callback='parse_item')
     ]
 
     def parse_item(self, response):
-        rand = random.randint(2, 4)
+        rand = random.randint(1, 2)
         time.sleep(rand)
         items = []
         sel = Selector(response)
